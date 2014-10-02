@@ -1,0 +1,10 @@
+http://stackoverflow.com/questions/10017806/do-c-sharp-winforms-have-htmldecode-equivalent-like-asp-net
+https://htmlrenderer.codeplex.com/
+http://www.w3schools.com/xpath/xpath_syntax.asp
+http://www.xpathtester.com/
+http://htmlagilitypack.codeplex.com/wikipage?title=Examples
+https://www.google.com/search?q=html+library+c%23&oq=html+library+c%23&aqs=chrome..69i57j0l5.8226j0j7&sourceid=chrome&espv=210&es_sm=122&ie=UTF-8
+http://webdesign.about.com/od/css/qt/tipcssmulticlas.htm
+https://www.google.com/search?q=apply+two+css+classes&oq=apply+two+css+cla&aqs=chrome.1.69i57j0l3.4424j0j7&sourceid=chrome&espv=210&es_sm=122&ie=UTF-8
+https://www.google.com/search?q=convert+html+to+winforms&oq=convert+html+to+winforms&aqs=chrome..69i57j0.3642j0j7&sourceid=chrome&espv=210&es_sm=122&ie=UTF-8#q=convert+html+to+winforms&safe=off&start=20
+

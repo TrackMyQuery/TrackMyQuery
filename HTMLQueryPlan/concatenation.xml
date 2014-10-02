@@ -1,0 +1,106 @@
+<ShowPlanXML Build="10.50.1600.1" Version="1.1" xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan">
+	<BatchSequence>
+		<Batch>
+			<Statements>
+				<StmtSimple QueryHash="0xCB5C134182C5B6C4" QueryPlanHash="0x9B498C6F0993F6FD" StatementCompId="1" StatementEstRows="4" StatementId="1" StatementOptmEarlyAbortReason="GoodEnoughPlanFound" StatementOptmLevel="FULL" StatementSubTreeCost="0.0065688" StatementText="SELECT * FROM People
+UNION ALL
+SELECT * FROM People" StatementType="SELECT">
+					<StatementSetOptions ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" ARITHABORT="false" CONCAT_NULL_YIELDS_NULL="true" NUMERIC_ROUNDABORT="false" QUOTED_IDENTIFIER="true"/>
+					<QueryPlan CachedPlanSize="16" CompileCPU="99" CompileMemory="80" CompileTime="99" DegreeOfParallelism="0">
+						<RelOp AvgRowSize="71" EstimateCPU="4e-007" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimateRows="4" EstimatedTotalSubtreeCost="0.0065688" LogicalOp="Concatenation" NodeId="0" Parallel="0" PhysicalOp="Concatenation">
+							<OutputList>
+								<ColumnReference Column="Union1006"/>
+								<ColumnReference Column="Union1007"/>
+								<ColumnReference Column="Union1008"/>
+								<ColumnReference Column="Union1009"/>
+							</OutputList>
+							<RunTimeInformation>
+								<RunTimeCountersPerThread ActualEndOfScans="1" ActualExecutions="1" ActualRows="4" Thread="0"/>
+							</RunTimeInformation>
+							<Concat>
+								<DefinedValues>
+									<DefinedValue>
+										<ColumnReference Column="Union1006"/>
+										<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</DefinedValue>
+									<DefinedValue>
+										<ColumnReference Column="Union1007"/>
+										<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</DefinedValue>
+									<DefinedValue>
+										<ColumnReference Column="Union1008"/>
+										<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</DefinedValue>
+									<DefinedValue>
+										<ColumnReference Column="Union1009"/>
+										<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</DefinedValue>
+								</DefinedValues>
+								<RelOp AvgRowSize="71" EstimateCPU="0.0001592" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimateRows="2" EstimatedTotalSubtreeCost="0.0032842" LogicalOp="Clustered Index Scan" NodeId="1" Parallel="0" PhysicalOp="Clustered Index Scan" TableCardinality="2">
+									<OutputList>
+										<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</OutputList>
+									<RunTimeInformation>
+										<RunTimeCountersPerThread ActualEndOfScans="1" ActualExecutions="1" ActualRows="2" Thread="0"/>
+									</RunTimeInformation>
+									<IndexScan ForcedIndex="0" NoExpandHint="0" Ordered="0">
+										<DefinedValues>
+											<DefinedValue>
+												<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+										</DefinedValues>
+										<Object Database="[StackOverflow]" Index="[PK_People_id]" IndexKind="Clustered" Schema="[dbo]" Table="[People]" TableReferenceId="1"/>
+									</IndexScan>
+								</RelOp>
+								<RelOp AvgRowSize="71" EstimateCPU="0.0001592" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimateRows="2" EstimatedTotalSubtreeCost="0.0032842" LogicalOp="Clustered Index Scan" NodeId="2" Parallel="0" PhysicalOp="Clustered Index Scan" TableCardinality="2">
+									<OutputList>
+										<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+										<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+									</OutputList>
+									<RunTimeInformation>
+										<RunTimeCountersPerThread ActualEndOfScans="1" ActualExecutions="1" ActualRows="2" Thread="0"/>
+									</RunTimeInformation>
+									<IndexScan ForcedIndex="0" NoExpandHint="0" Ordered="0">
+										<DefinedValues>
+											<DefinedValue>
+												<ColumnReference Column="firstname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="lastname" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="age" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+											<DefinedValue>
+												<ColumnReference Column="id" Database="[StackOverflow]" Schema="[dbo]" Table="[People]"/>
+											</DefinedValue>
+										</DefinedValues>
+										<Object Database="[StackOverflow]" Index="[PK_People_id]" IndexKind="Clustered" Schema="[dbo]" Table="[People]" TableReferenceId="2"/>
+									</IndexScan>
+								</RelOp>
+							</Concat>
+						</RelOp>
+					</QueryPlan>
+				</StmtSimple>
+			</Statements>
+		</Batch>
+	</BatchSequence>
+</ShowPlanXML>
