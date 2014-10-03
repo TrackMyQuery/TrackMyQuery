@@ -1,7 +1,7 @@
 TrackMyQuery
 ============
 
-TrackMyQuery is a utility written by Matan Yungman to provide a visual indication of where your query is stuck, while the query is running.
+TrackMyQuery is a utility written by [Matan Yungman](https://github.com/MatanYungman/) to provide a visual indication of where your query is stuck, while the query is running.
 
 ## Quick Guide
 
