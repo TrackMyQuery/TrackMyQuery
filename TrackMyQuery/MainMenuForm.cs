@@ -13,7 +13,7 @@ namespace TrackMyQuery
 
         private void MainMenuForm_Load(object sender, EventArgs e)
         {
-            this.CenterToScreen();            
+            this.CenterToScreen();
         }
 
         private void ButtonUseCXPacket_Click(object sender, EventArgs e)
@@ -28,25 +28,26 @@ namespace TrackMyQuery
 
         private void textBoxServerName_MouseClick(Object sender, MouseEventArgs e)
         {
-            textBoxServerName.Text = null;            
+            textBoxServerName.Text = null;
         }
 
         private void buttonTestConnection_Click(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection("Server="+textBoxServerName.Text+";Trusted_Connection=True;"))
+                using (DbConnector dbHelper = new DbConnector("Server=" + textBoxServerName.Text + ";Trusted_Connection=True;", Providers.SqlServer))
                 {
-                    connection.Open();
+                    dbHelper.Connection.Open();
                     MessageBox.Show("Connected Successfully");
                 }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ooops. Something's wrong");                
+                MessageBox.Show("Ooops. Something's wrong: \n" + ex.Message.ToString());
             }
-            
+
         }
-        
+
     }
 }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Data.Common;
 
 namespace TrackMyQuery
 {
@@ -13,10 +14,12 @@ namespace TrackMyQuery
         static bool isThereAPlan = true;
         private DateTime LastClickTime = DateTime.Now;
         private string serverName;
+        private DbConnector dbHelper = null;
 
         public CXPacketTrackingForm(string i_serverName)
         {
             serverName = i_serverName;
+            dbHelper = new DbConnector("Server=" + serverName + ";Trusted_Connection=True;");
             InitializeComponent();
         }
 
@@ -25,19 +28,16 @@ namespace TrackMyQuery
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private static void getCXPacketNodeIDs(int session_id, List<int> NodeIds, SqlConnection connection)
+        private static void getCXPacketNodeIDs(int session_id, List<int> NodeIds, DbConnector dbHelper)
         {
             string query = "select RIGHT (resource_description, CHARINDEX (N'=', REVERSE (resource_description)) - 1) as nodeId " +
                 "from sys.dm_os_waiting_tasks " +
                 "where wait_type = N'CXPacket' " +
                 "and session_id = @session_id";// +session_id.ToString();
 
-            SqlDataReader reader;
-            //reader = new SqlCommand(query, connection).ExecuteReader();
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.Add(new SqlParameter("@session_id", System.Data.SqlDbType.Int));
-            command.Parameters[0].Value = session_id;
-            reader = command.ExecuteReader();
+            dbHelper.AddParameter("@session_id", session_id);
+            DbDataReader reader = dbHelper.ExecuteReader(query, System.Data.CommandType.Text, ConnectionState.KeepOpen);
+
             while (reader.Read())
             {
                 int nodeId = (int.Parse)(reader["nodeId"].ToString());
@@ -51,7 +51,7 @@ namespace TrackMyQuery
         }
 
 
-        private static string getExecutionPlanXML(int session_id, SqlConnection connection)
+        private static string getExecutionPlanXML(int session_id, DbConnector dbHelper)
         {
             string query = "select query_plan " +
                                 "from sys.dm_exec_requests " +
@@ -62,11 +62,8 @@ namespace TrackMyQuery
             string executionPlanXML = null;
             try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.Add(new SqlParameter("@session_id", System.Data.SqlDbType.Int));
-                command.Parameters[0].Value = session_id;
-                //executionPlanXML = new SqlCommand(query, connection).ExecuteScalar().ToString();
-                executionPlanXML = command.ExecuteScalar().ToString();
+                dbHelper.AddParameter("@session_id", session_id);
+                executionPlanXML = dbHelper.ExecuteScalar(query, System.Data.CommandType.Text, ConnectionState.KeepOpen).ToString();
             }
             catch
             {
@@ -120,14 +117,14 @@ namespace TrackMyQuery
             List<int> QPNodePositions = new List<int>();
             List<int> NodeIds = new List<int>();
             //SqlConnection connection = new SqlConnection("Server=localhost;Database=AdventureWorks2012;Trusted_Connection=True;");
-            SqlConnection connection = new SqlConnection("Server="+serverName+";Trusted_Connection=True;");
-            connection.Open();
+            dbHelper.Connection.Open();
+            
             //Get ExecutionPlanXML and write it to disk for processing with qp.bat            
-            string ExecutionPlanXML = getExecutionPlanXML(int.Parse(textBoxSessionId.Text), connection);
+            string ExecutionPlanXML = getExecutionPlanXML(int.Parse(textBoxSessionId.Text), dbHelper);
             if (ExecutionPlanXML != null)
             {
                 System.IO.File.WriteAllText(@"C:\temp\HTMLQueryPlan\ExecutionPlan.sqlplan", ExecutionPlanXML.ToString());
-                getCXPacketNodeIDs(int.Parse(textBoxSessionId.Text), NodeIds, connection);
+                getCXPacketNodeIDs(int.Parse(textBoxSessionId.Text), NodeIds, dbHelper);
                 //Process execution plan in external application
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = @"C:\temp\HTMLQueryPlan\qp.bat";
@@ -163,7 +160,7 @@ namespace TrackMyQuery
 
                 //Write output file
                 System.IO.File.WriteAllText(@"C:\temp\HTMLQueryPlan\output.html", text.ToString());
-                connection.Close();
+                dbHelper.Dispose();
                 //Show revised execution plan
                 //webBrowser1.Navigate(new Uri(@"C:\temp\HTMLQueryPlan\output.html"));  
                 showPlanWebBrowser.Invoke(new UpdatePlanOnUICallback(this.updatePlanOnUI), new object[] { @"C:\temp\HTMLQueryPlan\output.html" });

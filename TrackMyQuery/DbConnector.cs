@@ -92,6 +92,11 @@ namespace TrackMyQuery
             get { return dbCommand; }
         }
 
+        public DbConnection Connection
+        {
+            get { return dbConnection; }
+        }
+
         public DbDataReader ExecuteReader(string dbQuery, CommandType dbCommandType, ConnectionState dbConnectionState)
         {
             DbDataReader dbReader = null;
