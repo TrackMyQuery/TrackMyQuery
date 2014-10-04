@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
+<<<<<<< HEAD
 using System.Data.Common;
+=======
+using System.Threading;
+>>>>>>> parent of ee90067... Added a DBConnector class
 
 namespace TrackMyQuery
 {

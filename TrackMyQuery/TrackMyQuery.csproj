@@ -78,7 +78,6 @@
     <Compile Include="CXPacketTrackingForm.Designer.cs">
       <DependentUpon>CXPacketTrackingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DbConnector.cs" />
     <Compile Include="MainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
